@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipeRefreshLayout"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SeekBar
+        android:id="@+id/tempSeek"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:max="14"
+        android:progress="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempLabel" />
+
+    <TextView
+        android:id="@+id/tempLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="C"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/tempPlus"
+        app:layout_constraintStart_toEndOf="@+id/tempMinus"
+        app:layout_constraintTop_toBottomOf="@+id/powerSwitch" />
+
+    <Switch
+        android:id="@+id/powerSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
+        android:onClick="togglePower"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/tempMinus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/button_cold"
+        android:onClick="tempMinus"
+        android:text="-"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerSwitch" />
+
+    <Button
+        android:id="@+id/tempPlus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/button_hot_hover"
+        android:onClick="tempPlus"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerSwitch" />
+
+    <LinearLayout
+        android:id="@+id/fanSpeedLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@xml/shape"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempSeek">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/fanSpeedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="4"
+                android:text="Fan Speed"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/fanAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectFanSpeed"
+                android:tag="0"
+                android:textOff="@string/auto"
+                android:textOn="@string/auto" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+
+            <ToggleButton
+                android:id="@+id/fanLow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectFanSpeed"
+                android:tag="1"
+                android:textOff="Low"
+                android:textOn="Low" />
+
+            <ToggleButton
+                android:id="@+id/fanMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectFanSpeed"
+                android:tag="2"
+                android:textOff="Med"
+                android:textOn="Med" />
+
+            <ToggleButton
+                android:id="@+id/fanHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectFanSpeed"
+                android:tag="3"
+                android:textOff="High"
+                android:textOn="High" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/climateModeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@xml/shape"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fanSpeedLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/climateModeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Climate Mode"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/modeAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectClimateMode"
+                android:tag="0"
+                android:textOff="@string/auto"
+                android:textOn="@string/auto" />
+
+            <ToggleButton
+                android:id="@+id/modeCool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectClimateMode"
+                android:tag="1"
+                android:textOff="Cool"
+                android:textOn="Cool" />
+
+            <ToggleButton
+                android:id="@+id/modeDry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectClimateMode"
+                android:tag="2"
+                android:textOff="Dry"
+                android:textOn="Dry" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/modeHeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectClimateMode"
+                android:tag="3"
+                android:textOff="Heat"
+                android:textOn="Heat" />
+
+            <ToggleButton
+                android:id="@+id/modeFan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectClimateMode"
+                android:tag="4"
+                android:textOff="Fan"
+                android:textOn="Fan" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/otherButtonsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@xml/shape"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verticalSwingLayout">
+
+        <TextView
+            android:id="@+id/otherButtonsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other Buttons"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/turboBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:minHeight="0dp"
+                android:onClick="selectTurbo"
+                android:tag="0"
+                android:textOff="Turbo"
+                android:textOn="Turbo" />
+
+            <ToggleButton
+                android:id="@+id/healthBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:minHeight="0dp"
+                android:onClick="selectHealth"
+                android:tag="1"
+                android:textOff="Health"
+                android:textOn="Health" />
+
+
+            <ToggleButton
+                android:id="@+id/quietBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:minHeight="0dp"
+                android:onClick="selectQuiet"
+                android:tag="3"
+                android:textOff="Quiet"
+                android:textOn="Quiet" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/displayBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:minHeight="0dp"
+                android:onClick="toggleDisplay"
+                android:tag="2"
+                android:checked="true"
+                android:textOff="Display"
+                android:textOn="Display" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/saveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="saveButton"
+                android:tag="3"
+                android:textOff="Save"
+                android:textOn="Save" />
+
+            <ToggleButton
+                android:id="@+id/autosendBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:checked="true"
+                android:minHeight="0dp"
+                android:onClick="selectAutoSend"
+                android:tag="4"
+                android:textOff="Auto Send"
+                android:textOn="Auto Send" />
+
+            <ToggleButton
+                android:id="@+id/sendBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="sendButton"
+                android:tag="5"
+                android:textOff="Send >"
+                android:textOn="Send >" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/verticalSwingLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@xml/shape"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/climateModeLayout">
+
+        <TextView
+            android:id="@+id/verticalSwingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Swing Mode"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/swingStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="0"
+                android:textOff="Stop"
+                android:textOn="Stop" />
+
+            <ToggleButton
+                android:id="@+id/swingAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="1"
+                android:textOff="Auto"
+                android:textOn="Auto" />
+
+            <ToggleButton
+                android:id="@+id/swingTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="2"
+                android:textOff="Top"
+                android:textOn="Top" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/swingFront"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="3"
+                android:textOff="Front"
+                android:textOn="Front" />
+
+            <ToggleButton
+                android:id="@+id/swingBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="4"
+                android:textOff="Bottom"
+                android:textOn="Bottom" />
+
+            <ToggleButton
+                android:id="@+id/swingDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:minHeight="0dp"
+                android:onClick="selectVerticalSwingMode"
+                android:tag="5"
+                android:textOff="Down"
+                android:textOn="Down" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="40dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="34dp"
+        android:background="#00000000"
+        android:onClick="func"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_setting_round"
+        android:text="..."
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
