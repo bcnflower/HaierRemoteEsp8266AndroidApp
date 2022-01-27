@@ -153,8 +153,8 @@
                 android:minHeight="0dp"
                 android:onClick="selectFanSpeed"
                 android:tag="2"
-                android:textOff="Med"
-                android:textOn="Med" />
+                android:textOff="Medium"
+                android:textOn="Medium" />
 
             <ToggleButton
                 android:id="@+id/fanHigh"
